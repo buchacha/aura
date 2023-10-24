@@ -27,7 +27,7 @@ const Component = () => {
         }
 
         try {
-            const response = await fetch('http://api.aura-ai.site/api/users/', {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/users/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -43,7 +43,7 @@ const Component = () => {
                 setValidated(false);
                 setErrorMessage(responseData.message);
             } else {
-                const responseToken = await fetch('http://api.aura-ai.site/api/token/', {
+                const responseToken = await fetch(`${process.env.REACT_APP_API_URL}/api/token/`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

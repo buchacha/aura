@@ -76,7 +76,7 @@ const Form_post = ({ data }) => {
 
       const authTokens = localStorage.getItem('authTokens');
 
-      const response = await fetch('http://api.aura-ai.site/api/users/profile/', {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/users/profile/`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${JSON.parse(authTokens).access}`
@@ -144,7 +144,7 @@ function DataComponent() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    axios.get('http://api.aura-ai.site/api/user/check/')
+    axios.get(`${process.env.REACT_APP_API_URL}/api/user/check/`)
       .then(response => {
         setData({
           authenticated_user: response.data.authenticated_user

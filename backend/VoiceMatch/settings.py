@@ -12,13 +12,20 @@ SECRET_KEY = "django-insecure-273c2jjigs#oi^(1%!&(_+=-rez@l%@_ca=ohvsag^kqd=sc%x
 # Режим отладки
 DEBUG = True  # LOCALDEV
 
-# Настройки доступа ->
+CORS_ALLOW_ALL_ORIGINS = False  # Запретить доступ от всех источников (False)
+CORS_ALLOW_CREDENTIALS = True  # Разрешить отправку куки и заголовков аутентификации
+
+# Добавьте домены, с которых разрешены запросы (http://localhost:3000, http://127.0.0.1:8000 и другие)
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:*",
-]  # LOCALDEV
+    "http://localhost:3000",
+    "http://127.0.0.1:8000",
+    # Другие домены
+]
 
 ALLOWED_HOSTS = [
     "127.0.0.1",  # LOCALDEV
+    "localhost",
+    "127.0.0.1:3000",
     "api.aura-ai.site",
     "www.api.aura-ai.site",
     "aura-ai.site",
@@ -51,6 +58,7 @@ CORS_ALLOW_METHODS = [
 ]
 
 CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3000',
     'https://aura-ai.site',
     'https://api.aura-ai.site',
     'http://aura-ai.site',

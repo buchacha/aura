@@ -150,7 +150,7 @@ class UserSearchView(APIView):
         serializer_user = UserProfileSerializer(profile_instance, context={"request": request})
         response_data = {
             'profiles': serializer.data,
-            'authenticated_user_photo': 'https://api.aura-ai.site' + profile_instance.photo.url,
+            'authenticated_user_photo': 'http://localhost:8000' + profile_instance.photo.url,
             'authenticated_user_likes_count':  profile_instance.likes_count,
             'authenticated_user_like_list': profile_instance.likes_user_list,
             'authenticated_parameter_array': profile_instance.parameter_array,

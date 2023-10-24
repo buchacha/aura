@@ -18,10 +18,10 @@ const Component = () => {
 
   const fetchData = async () => {
     const authTokens = JSON.parse(localStorage.getItem('authTokens'));
-    axios.defaults.headers.common['Authorization'] = `Bearer ${authTokens.access}`;
 
     try {
-      const response = await axios.get('http://api.aura-ai.site/api/user/check/');
+      axios.defaults.headers.common['Authorization'] = `Bearer ${authTokens.access}`;
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/user/check/`);
       setUserData({
         authenticated_user: response.data.authenticated_user,
       });
@@ -46,7 +46,7 @@ const Component = () => {
       return;
     }
 
-    const response = await fetch('http://api.aura-ai.site/api/token/', {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/token/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

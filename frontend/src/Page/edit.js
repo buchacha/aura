@@ -230,7 +230,7 @@ const EditComponent = ({ data, date }) => {
         formData.append('age_year', JSON.stringify(calculateAge(startDate.toLocaleDateString('en-GB').split(',')[0], newdate)));
 
         try {
-            const response = await axios.post('http://api.aura-ai.site/api/users/profile/', formData, {
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/users/profile/`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -333,7 +333,7 @@ function DataComponent(props) {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        axios.get('http://api.aura-ai.site/api/users/profile/')
+        axios.get(`${process.env.REACT_APP_API_URL}/api/users/profile/`)
             .then(response => {
                 setData({ profiles: response.data.profiles, authenticated_user_photo: response.data.authenticated_user_photo });
                 setStartDateString({ date: response.data.profiles.age });

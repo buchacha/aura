@@ -155,7 +155,7 @@ const ProfileList = ({ data }) => {
     } else {
       age_array = "[18," + calculateAge(data.authenticated_user_age, newdate) + "]"
     }
-    axios.post('http://api.aura-ai.site/api/users/profile/', {
+    axios.post(`${process.env.REACT_APP_API_URL}/api/users/profile/`, {
       likes_count: data.authenticated_user_likes_count,
       likes_user_list: like_list.current,
       age_year: calculateAge(data.authenticated_user_age, newdate),
@@ -171,7 +171,7 @@ const ProfileList = ({ data }) => {
   };
 
   const postDataMatch = () => {
-    axios.post('http://api.aura-ai.site/api/users/add_match/', {
+    axios.post(`${process.env.REACT_APP_API_URL}/api/users/add_match/`, {
       match_user_list: match_user_list.current,
     })
       .then(response => {
@@ -185,7 +185,7 @@ const ProfileList = ({ data }) => {
   };
 
   const deleteDataMatch = () => {
-    axios.post('http://api.aura-ai.site/api/users/remove_match/', {
+    axios.post(`${process.env.REACT_APP_API_URL}/api/users/remove_match/`, {
       match_user_list: match_user_list.current,
     })
       .then(response => {
@@ -208,7 +208,7 @@ const ProfileList = ({ data }) => {
       age_array = "[18," + calculateAge(data.authenticated_user_age, newdate) + "]";
     }
     axios
-      .post('http://api.aura-ai.site/api/users/profile/', {
+      .post(`${process.env.REACT_APP_API_URL}/api/users/profile/`, {
         likes_count: data.authenticated_user_likes_count,
         likes_user_list: like_list.current,
         age_year: calculateAge(data.authenticated_user_age, newdate),
@@ -234,7 +234,7 @@ const ProfileList = ({ data }) => {
       age_array = "[18," + calculateAge(data.authenticated_user_age, newdate) + "]";
     }
     axios
-      .post('http://api.aura-ai.site/api/users/profile/', {
+      .post(`${process.env.REACT_APP_API_URL}/api/users/profile/`, {
         likes_count: data.authenticated_user_likes_count,
         likes_user_list: like_list.current,
         age_year: calculateAge(data.authenticated_user_age, newdate),
@@ -573,7 +573,7 @@ function DataComponent(props) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    axios.get('http://api.aura-ai.site/api/user/search/')
+    axios.get(`${process.env.REACT_APP_API_URL}/api/user/search/`)
       .then(response => {
         setData({
           profiles: response.data.profiles,
