@@ -1,16 +1,9 @@
-"""
-WSGI config for VoiceMatch project.
-
-It exposes the WSGI callable as a module-level variable named ``application``.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/4.2/howto/deployment/wsgi/
-"""
-
 import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'VoiceMatch.settings')
 
+# Установка переменной DJANGO_SETTINGS_MODULE
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'VoiceMatch.settings')
+# Инициализация WSGI
 application = get_wsgi_application()

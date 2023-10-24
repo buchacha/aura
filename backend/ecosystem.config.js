@@ -5,10 +5,10 @@ module.exports = {
 			"args" : 
 			[
 				"runserver",
-				"20000"
+				"20000",
 			],
 			"name" : "api.aura-ai.site",
-			"script" : "manage.py"
+			"script" : "manage.py",
 		}
 	]
 }

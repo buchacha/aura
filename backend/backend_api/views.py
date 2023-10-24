@@ -1,20 +1,29 @@
-from django.utils import timezone
-from django.contrib.auth import login, logout
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import UserRegisterSerializer, UserLoginSerializer, UserSerializer, UserProfileSerializer
 from rest_framework import permissions, status
-from .validations import custom_validation, validate_email, validate_password
-from django.core.exceptions import ValidationError
-
-from backend_api.ML import ml
-
-from .models import User, UserProfile
-
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
-
+from django.core.exceptions import ValidationError
+from django.contrib.auth import login, logout
+from django.utils import timezone
 from django.db.models import Q
+
+from .validations import (
+    custom_validation,
+    validate_email,
+    validate_password,
+)
+from .serializers import (
+    UserRegisterSerializer,
+    UserLoginSerializer,
+    UserSerializer,
+    UserProfileSerializer,
+)
+from .models import (
+    User,
+    UserProfile,
+)
+from .ML import ml
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
