@@ -1,6 +1,6 @@
 import React, { Component, useEffect, useState } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Button, Form } from "react-bootstrap";
+import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import axios from 'axios';
 
 import { Link } from 'react-router-dom'
@@ -33,6 +33,11 @@ function calculateAge(birthDate, otherDate) {
     }
     return 0;
 }
+
+const handleLogout = () => {
+  localStorage.removeItem('authTokens');
+  window.location.replace('/login'); // Перенаправьте пользователя на страницу входа
+};
 
 const DataComponent = () => {
 
@@ -143,6 +148,48 @@ const DataComponent = () => {
                             })}
                         </div>
                     )}
+                    <Button
+                        className='noBorder'
+                        variant='custom'
+                        onClick={handleLogout}
+                        style={{
+                            marginTop: '5%',
+                            backgroundColor: 'red',
+                            color: 'white',
+                            border: '1px solid #ccc',
+                            paddingTop: '4%',
+                            borderRadius: '20px',
+                            display: 'flex', // устанавливаем отображение в виде блока
+                            alignItems: 'center', // выравниваем по вертикали
+                            justifyContent: 'center', // выравниваем по горизонтали
+                            width: '100%',
+                        }}
+                    >
+                        <h3
+                            style={{
+                                color: 'white',
+                                paddingTop: '3wh',
+                                display : 'flex',
+                                alignItems : 'center',
+                                justifyContent : 'center',
+                            }}
+                        >
+                            Выйти
+                        </h3>
+                    </Button>
+                    <div className='bodyCustom marjin-top 10px'>
+                        {/* Ваша существующая информация о профиле здесь... */}
+
+                        <Container fluid>
+                            <Row className="justify-content-center">
+                                <Col md={6}>
+                                    <h2 className="otherTitle text-center">Поддержка</h2>
+                                    <p className="mainText text-center">support@example.com</p>
+                                    <p className="mainText text-center">@support_telegram</p>
+                                </Col>
+                            </Row>
+                        </Container>
+                    </div>
                 </div>
             </div>
         </div>

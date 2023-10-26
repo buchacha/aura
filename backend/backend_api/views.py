@@ -171,7 +171,7 @@ class CreateUserProfileView(APIView):
         serializer = UserProfileSerializer(profile_instance)
         response_data = {
             'profiles': serializer.data,
-            'authenticated_user_photo': 'https://api.aura-ai.site' + profile_instance.photo.url,
+            'authenticated_user_photo': 'http://localhost:8000' + profile_instance.photo.url,
         }
         return Response(response_data)
 

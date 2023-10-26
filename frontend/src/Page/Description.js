@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import "../Component/description.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Carousel } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 function GetDescription() {
     const carouselItems = [
@@ -24,6 +25,21 @@ function GetDescription() {
             mainText: 'Построй долгосрочные отношения благодаря максимальной гармонии с партнером',
         },
     ];
+
+
+    const navigate = useNavigate(); // Get the history object
+
+    useEffect(() => {
+        // Check if there is a token (you can replace this with your actual token check logic)
+        const hasToken = localStorage.getItem('authTokens'); // Assuming you store the token in localStorage
+
+        if (hasToken) {
+            // Redirect to the "/card" route
+            navigate('/card');
+        }
+    }, [navigate]);
+
+
 
     const handleButtonClick = () => {
         window.location.href = '/singup';
