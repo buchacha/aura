@@ -196,17 +196,20 @@ const Form_post = ({ data }) => {
     const audioRef = useRef();
 
     const start = () => {
-        setPlaying(true);
-        audioRef.current.play();
-        audioRef.current.addEventListener("ended", function () {
-            audioRef.current.currentTime = 0;
-            handleButtonClickPause()
-        });
+    setPlaying(true);
+    audioRef.current.play();
+    audioRef.current.addEventListener("ended", () => {
+      audioRef.current.currentTime = 0;
+      handleButtonClickPause();
+      setVisible(true); // Обновите состояние visible
+      setPlaying(false); // Установите состояние воспроизведения в false
+    });
     }
 
     const pause = () => {
-        setPlaying(false);
-        audioRef.current.pause();
+    setPlaying(false);
+    setVisible(true); // Показать элемент при приостановке воспроизведения
+    audioRef.current.pause();
     }
 
     const like_list = useRef(data.authenticated_user.likes_user_list);

@@ -306,14 +306,17 @@ const ProfileList = ({ data }) => {
   const start = () => {
     setPlaying(true);
     audioRef.current.play();
-    audioRef.current.addEventListener("ended", function () {
+    audioRef.current.addEventListener("ended", () => {
       audioRef.current.currentTime = 0;
-      handleButtonClickPause()
+      handleButtonClickPause();
+      setVisible(true); // Обновите состояние visible
+      setPlaying(false); // Установите состояние воспроизведения в false
     });
   }
 
   const pause = () => {
     setPlaying(false);
+    setVisible(true); // Показать элемент при приостановке воспроизведения
     audioRef.current.pause();
   }
 
