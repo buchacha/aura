@@ -312,7 +312,7 @@ const Form_post = ({ data }) => {
 
     const deleteDataWithMatch = () => {
         axios
-            .post('${process.env.REACT_APP_API_URL}/api/users/profile/', {
+            .post(`${process.env.REACT_APP_API_URL}/api/users/profile/`, {
                 likes_count: data.authenticated_user.likes_count,
                 likes_user_list: like_list.current,
                 match_user_list: match_user_list.current,
@@ -351,10 +351,10 @@ const Form_post = ({ data }) => {
                 console.log('Data posted successfully:', response.data);
                 updateRemoveMatchList();
                 updateRemoveLikeList();
+                postData();
                 if (!isMatch) {
                     navigate('/card2', { state: { currentProfile: item, precent: item2 } })
                 }
-                postData();
             })
             .catch(error => {
                 console.error('Error while posting data:', error);

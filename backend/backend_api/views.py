@@ -218,16 +218,25 @@ class MatchRemoveView(APIView):
         authenticated_user = User.objects.get(pk=request.auth.payload['user_id'])
         profile_instance, created = UserProfile.objects.get_or_create(user=authenticated_user)
 
-        profile_match_instance, created = UserProfile.objects.get_or_create(user_id=profile_instance.match_user_list[-1])
+        profile_match_instance, created = UserProfile.objects.get_or_create(
+            user_id=profile_instance.match_user_list[-1])
 
         profile_serializer = UserProfileSerializer(instance=profile_match_instance, data=request.data, partial=True)
 
         match_user_list = profile_match_instance.match_user_list
 
-        match_user_list.remove(profile_instance.user_id)
+        matched_user_id = profile_instance.user_id
+
+        if matched_user_id in match_user_list:
+            match_user_list.remove(matched_user_id)
+
+        # Check if the authenticated user liked the matched user
+        if matched_user_id in profile_instance.likes_user_list:
+            profile_instance.likes_user_list.remove(matched_user_id)
 
         if profile_serializer.is_valid(raise_exception=True):
             profile_serializer.save(match_user_list=match_user_list)
+            profile_instance.save()  # Save the changes to the authenticated user's likes_user_list
             return Response(profile_serializer.data)
 
         return Response(profile_serializer.errors)
