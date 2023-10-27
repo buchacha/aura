@@ -20,6 +20,7 @@ import Premium from './Page/premium';
 import Sympathy from './Page/sympathy';
 import Match from './Page/match';
 import reportWebVitals from './reportWebVitals';
+import EditInterests from './Page/edit_interests';
 import "./global.css";
 
 import {
@@ -31,6 +32,10 @@ import {
 
 
 const router = createBrowserRouter([
+  {
+    path: "edit-interests",
+    element: <EditInterests />,
+  },
   {
     path: "singup",
     element: <SingUP />,

@@ -250,7 +250,7 @@ const EditComponent = ({ data, date }) => {
         <div>
             <div className="align-items-center justify-content-center">
                 <div className="d-flex vertical-center-2 flex-row justify-content-start navCustom">
-                    <Button onClick={() => navigate(-1)} className='arrow' variant='custom'>
+                    <Button onClick={() => navigate('/profile')} className='arrow' variant='custom'>
                         <img className="mainSVG" src={"arrow-left.svg"} alt="options" />
                     </Button>
                     <a className="p-3 navCustomTitle">Редактировать</a>
@@ -301,7 +301,7 @@ const EditComponent = ({ data, date }) => {
                     </Form.Select>
                     <h4 className="CustomTitle">Интересы</h4>
                     {/* <Link reloadDocument to={'/edit2'} > */}
-                    <Form.Control className='inputCustom fix-keybord' type="text" name="name" placeholder="Интересы" autoComplete="off" disabled />
+                    <Form.Control className='inputCustom fix-keybord' type="text" name="name" placeholder="Интересы" autoComplete="off" onClick={() => navigate('/edit-interests')}/>
                     {/* </Link> */}
                     <h4 className="CustomTitle">Контакты</h4>
                     <Form.Control className='inputCustom fix-keybord' type="text" name="social_media_vk" placeholder="ВКонтакте: @username" autoComplete="off" defaultValue={data.profiles.social_media_vk} onChange={handleChange} />
