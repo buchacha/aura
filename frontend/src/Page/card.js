@@ -575,11 +575,20 @@ function DataComponent(props) {
 
   const [isLoading, setIsLoading] = useState(true);
 
+  const shuffleArray = (array) => {
+    let shuffledArray = array.slice(); // Создаем копию массива
+    for (let i = shuffledArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]]; // Меняем элементы местами
+    }
+    return shuffledArray;
+  };
+
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_API_URL}/api/user/search/`)
       .then(response => {
         setData({
-          profiles: response.data.profiles,
+          profiles: shuffleArray(response.data.profiles),
           authenticated_user_photo: response.data.authenticated_user_photo,
           authenticated_user_likes_count: response.data.authenticated_user_likes_count,
           authenticated_user_like_list: response.data.authenticated_user_like_list,
