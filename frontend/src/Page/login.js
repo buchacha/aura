@@ -5,8 +5,13 @@ import "../Component/common.css";
 import axios from 'axios';
 
 import { useNavigate } from 'react-router-dom';
+import * as amplitude from "@amplitude/analytics-browser";
 
 const Component = () => {
+  useEffect(() => {
+        amplitude.track('auth_login_opened');
+    }, []);
+
   const [errorMessage, setErrorMessage] = useState("");
   const [validated, setValidated] = useState(false);
   const [userData, setUserData] = useState({ authenticated_user: null, });
@@ -60,6 +65,15 @@ const Component = () => {
       const data = await response.json();
       localStorage.setItem('authTokens', JSON.stringify(data))
       fetchData();
+
+      amplitude.setUserId(formData.email);
+
+      const identifyEvent = new amplitude.Identify();
+      identifyEvent.set('status', 'authorized');
+      amplitude.identify(identifyEvent);
+
+      amplitude.track('auth_login_succed');
+
       if (userData.authenticated_user && userData.authenticated_user.is_profile_complete) {
         navigate('/card');
       } else {

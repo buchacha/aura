@@ -3,6 +3,7 @@ import "../Component/description.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Carousel } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import * as amplitude from "@amplitude/analytics-browser";
 
 function GetDescription() {
     const carouselItems = [
@@ -26,7 +27,6 @@ function GetDescription() {
         },
     ];
 
-
     const navigate = useNavigate(); // Get the history object
 
     useEffect(() => {
@@ -37,11 +37,14 @@ function GetDescription() {
             // Redirect to the "/card" route
             navigate('/card');
         }
+
+        amplitude.track('hello_opened');
     }, [navigate]);
 
 
 
     const handleButtonClick = () => {
+        amplitude.track('hello_next_pressed');
         window.location.href = '/singup';
     };
 

@@ -4,8 +4,12 @@ import Button from 'react-bootstrap/Button';
 import "../Component/common.css"
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import * as amplitude from "@amplitude/analytics-browser";
 
 const Component = () => {
+    useEffect(() => {
+        amplitude.track('auth_signup_opened');
+    }, []);
 
     const [errorMessage, setErrorMessage] = useState("");
     const [validated, setValidated] = useState(false);
@@ -56,6 +60,15 @@ const Component = () => {
 
                 const tokenData = await responseToken.json();
                 localStorage.setItem('authTokens', JSON.stringify(tokenData));
+
+                amplitude.setUserId(formData.email);
+
+                const identifyEvent = new amplitude.Identify();
+                identifyEvent.set('status', 'authorized');
+                amplitude.identify(identifyEvent);
+
+                amplitude.track('auth_signup_succed');
+
                 navigate('/form');
             }
         } catch (error) {
