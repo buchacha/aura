@@ -301,7 +301,7 @@ const EditComponent = ({ data, date }) => {
                     </Form.Select>
                     <h4 className="CustomTitle">Интересы</h4>
                     {/* <Link reloadDocument to={'/edit2'} > */}
-                    <Form.Control className='inputCustom fix-keybord' type="text" name="name" placeholder="Интересы" autoComplete="off" onClick={() => navigate('/edit-interests')}/>
+                    <Form.Control className='inputCustom fix-keybord' type="text" name="name" placeholder="Интересы" autoComplete="off" form="no-form" onClick={() => navigate('/edit-interests')}/>
                     {/* </Link> */}
                     <h4 className="CustomTitle">Контакты</h4>
                     <Form.Control className='inputCustom fix-keybord' type="text" name="social_media_vk" placeholder="ВКонтакте: @username" autoComplete="off" defaultValue={data.profiles.social_media_vk} onChange={handleChange} />
