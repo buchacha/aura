@@ -95,6 +95,7 @@ class CheckUser(APIView):
         serializer = UserProfileSerializer(profile_instance, context={"request": request})
         response_data = {
             'authenticated_user': serializer.data,
+            'authenticated_user_email': profile_instance.user.email,
         }
 
         return Response(response_data)
@@ -157,6 +158,7 @@ class UserSearchView(APIView):
             'authenticated_user_age': profile_instance.age,
             'authenticated_user_age_filter': profile_instance.age_filter,
             'authenticated_user_id': profile_instance.user.id,
+            'authenticated_user_email': profile_instance.user.email,
             'authenticated_user': serializer_user.data,
         }
         return Response(response_data)

@@ -112,7 +112,7 @@ const router = createBrowserRouter([
 ]);
 
 amplitude.init(process.env.REACT_APP_AMPLITUDE_API_KEY, {
-    logLevel: amplitude.Types.LogLevel.Warn,
+    logLevel: amplitude.Types.LogLevel.Debug,
     defaultTracking: {
       attribution: false,
       pageViews: false,
@@ -121,6 +121,10 @@ amplitude.init(process.env.REACT_APP_AMPLITUDE_API_KEY, {
       fileDownloads: false,
     },
   });
+
+const identifyEvent = new amplitude.Identify();
+identifyEvent.set('app_version', '1.0.0');
+amplitude.identify(identifyEvent);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

@@ -8,6 +8,7 @@ import Home from '../../Page/home.js';
 import axios from 'axios';
 
 import Slider from 'rc-slider';
+import * as amplitude from "@amplitude/analytics-browser";
 
 
 const Form_post = ({ data }) => {
@@ -145,6 +146,10 @@ const Form_post = ({ data }) => {
 };
 
 function DataComponent() {
+    useEffect(() => {
+        amplitude.track('onboard_character_opened');
+    }, []);
+
     const [data, setData] = useState({ authenticated_user: null, });
 
     if (!localStorage.hasOwnProperty('authTokens')) {

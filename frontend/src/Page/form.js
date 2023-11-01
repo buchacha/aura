@@ -17,6 +17,7 @@ import 'reactjs-popup/dist/index.css';
 import Popup from 'reactjs-popup';
 
 import { useNavigate } from 'react-router-dom';
+import * as amplitude from "@amplitude/analytics-browser";
 
 
 
@@ -114,6 +115,13 @@ const Form_post = ({ data }) => {
         ) {
             navigate('/form2');
         }
+        const identifyEvent = new amplitude.Identify();
+        identifyEvent.set('status', 'authorized');
+        amplitude.identify(identifyEvent);
+
+        amplitude.setUserId(data.authenticated_user_email);
+
+        amplitude.track('onboard_about_opened');
     }, []);
 
     const [selectedCountry, setSelectedCountry] = useState('');
@@ -246,6 +254,7 @@ const Form_post = ({ data }) => {
             if (response.status === 200) {
                 const data = await response.json();
                 console.log(data);
+
                 navigate('/form2')
             } else {
                 alert('Ошибка!!!')
@@ -315,7 +324,10 @@ const Form_post = ({ data }) => {
 };
 
 function DataComponent() {
-    const [data, setData] = useState({ authenticated_user: null, });
+    const [data, setData] = useState({
+        authenticated_user: null,
+        authenticated_user_email: null
+    });
 
     if (!localStorage.hasOwnProperty('authTokens')) {
         window.open("/login", "_self");
@@ -330,7 +342,8 @@ function DataComponent() {
         axios.get(`${process.env.REACT_APP_API_URL}/api/user/check/`)
             .then(response => {
                 setData({
-                    authenticated_user: response.data.authenticated_user
+                    authenticated_user: response.data.authenticated_user,
+                    authenticated_user_email: response.data.authenticated_user_email,
                 });
                 setIsLoading(false);
             })

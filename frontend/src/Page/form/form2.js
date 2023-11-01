@@ -3,6 +3,7 @@ import { Button, Form, ButtonGroup, ToggleButton } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Home from '../../Page/home.js';
+import * as amplitude from "@amplitude/analytics-browser";
 
 const Button_checkbox = ({ checkboxs, selectedInterests, setSelectedInterests }) => {
   const [checkboxValues, setCheckboxValues] = useState([]);
@@ -51,6 +52,17 @@ const Form_post = ({ data }) => {
     ) {
       navigate('/form3');
     }
+    const identifyEvent = new amplitude.Identify();
+    identifyEvent.set('status', 'authorized');
+    identifyEvent.set('sex', data.authenticated_user.sex);
+    identifyEvent.set('age', data.authenticated_user.age);
+    identifyEvent.set('country', data.authenticated_user.country);
+    identifyEvent.set('city', data.authenticated_user.city);
+    amplitude.identify(identifyEvent);
+
+    amplitude.setUserId(data.authenticated_user_email);
+
+    amplitude.track('onboard_interest_opened')
   }, []);
 
 
@@ -129,7 +141,10 @@ const Form_post = ({ data }) => {
 };
 
 function DataComponent() {
-  const [data, setData] = useState({ authenticated_user: null, });
+  const [data, setData] = useState({
+    authenticated_user: null,
+    authenticated_user_email: null,
+  });
 
   if (!localStorage.hasOwnProperty('authTokens')) {
     window.open("/login", "_self");
@@ -143,8 +158,10 @@ function DataComponent() {
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_API_URL}/api/user/check/`)
       .then(response => {
+        console.log(response.data);
         setData({
-          authenticated_user: response.data.authenticated_user
+          authenticated_user: response.data.authenticated_user,
+          authenticated_user_email: response.data.authenticated_user_email,
         });
         setIsLoading(false);
       })

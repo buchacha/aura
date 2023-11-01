@@ -8,6 +8,7 @@ import 'reactjs-popup/dist/index.css';
 import Popup from 'reactjs-popup';
 
 import axios from 'axios';
+import * as amplitude from "@amplitude/analytics-browser";
 
 const Form_post = ({ data }) => {
 
@@ -23,6 +24,17 @@ const Form_post = ({ data }) => {
         ) {
             navigate('/form6');
         }
+        const identifyEvent = new amplitude.Identify();
+        identifyEvent.set('status', 'authorized');
+        identifyEvent.set('sex', data.authenticated_user.sex);
+        identifyEvent.set('age', data.authenticated_user.age);
+        identifyEvent.set('country', data.authenticated_user.country);
+        identifyEvent.set('city', data.authenticated_user.city);
+        amplitude.identify(identifyEvent);
+
+        amplitude.setUserId(data.authenticated_user_email);
+
+        amplitude.track('onboard_audio_opened');
     }, []);
 
     const [validated, setValidated] = useState(false);
@@ -383,7 +395,10 @@ const Form_post = ({ data }) => {
 }
 
 function DataComponent() {
-    const [data, setData] = useState({ authenticated_user: null, });
+    const [data, setData] = useState({
+        authenticated_user: null,
+        authenticated_user_email: null,
+    });
 
     if (!localStorage.hasOwnProperty('authTokens')) {
         window.open("/login", "_self");
@@ -398,7 +413,8 @@ function DataComponent() {
         axios.get(`${process.env.REACT_APP_API_URL}/api/user/check/`)
             .then(response => {
                 setData({
-                    authenticated_user: response.data.authenticated_user
+                    authenticated_user: response.data.authenticated_user,
+                    authenticated_user_email: response.data.authenticated_user_email,
                 });
                 setIsLoading(false);
             })
