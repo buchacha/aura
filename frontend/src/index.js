@@ -29,6 +29,7 @@ import {
   Route,
   Link,
 } from "react-router-dom";
+import * as amplitude from "@amplitude/analytics-browser";
 
 
 const router = createBrowserRouter([
@@ -110,6 +111,16 @@ const router = createBrowserRouter([
   },
 ]);
 
+amplitude.init(process.env.REACT_APP_AMPLITUDE_API_KEY, {
+    logLevel: amplitude.Types.LogLevel.Warn,
+    defaultTracking: {
+      attribution: false,
+      pageViews: false,
+      sessions: true,
+      formInteractions: false,
+      fileDownloads: false,
+    },
+  });
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
