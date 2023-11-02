@@ -183,9 +183,7 @@ const ProfileList = ({ data }) => {
       age_filter: age_array,
       match_user_list: match_user_list.current,
     })
-      .then(response => {
-        console.log('Data posted successfully:', response.data);
-      })
+      .then(response => {})
       .catch(error => {
         console.error('Error while posting data:', error);
       });
@@ -196,7 +194,6 @@ const ProfileList = ({ data }) => {
       match_user_list: match_user_list.current,
     })
       .then(response => {
-        console.log('Data posted successfully:', response.data);
         setCurrentIndex(prevIndex => prevIndex + 1);
         postData();
       })
@@ -210,7 +207,6 @@ const ProfileList = ({ data }) => {
       match_user_list: match_user_list.current,
     })
       .then(response => {
-        console.log('Data posted successfully:', response.data);
         updateRemoveMatchList();
         updateRemoveLikeList();
         setCurrentIndex(prevIndex => prevIndex + 1);
@@ -237,7 +233,6 @@ const ProfileList = ({ data }) => {
         match_user_list: match_user_list.current,
       })
       .then(response => {
-        console.log('Data posted successfully:', response.data);
         postDataMatch();
         setIsMatch(true);
       })
@@ -263,7 +258,6 @@ const ProfileList = ({ data }) => {
         match_user_list: match_user_list.current,
       })
       .then(response => {
-        console.log('Data posted successfully:', response.data);
         deleteDataMatch();
         setIsMatch(false);
       })
@@ -281,13 +275,14 @@ const ProfileList = ({ data }) => {
   const counterRef = useRef(0);
 
   const handleNo = () => {
-    console.log(data);
-    amplitude.track({
+    if (data.profiles.length < currentIndex) {
+      amplitude.track({
           event_type: "Cards Discard Pressed",
           event_properties: {
             partner_id: data.profiles[currentIndex].user,
           },
         })
+    }
     setCurrentIndex(prevIndex => prevIndex + 1);
     postData();
   };

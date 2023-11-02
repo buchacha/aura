@@ -92,9 +92,7 @@ const Form_post = ({ data }) => {
             age_filter: formData.age_filter,
             parameter_array: formData.parameter_array,
         })
-            .then(response => {
-                console.log('Data posted successfully:', response.data);
-            })
+            .then(response => {})
             .catch(error => {
                 console.error('Error while posting data:', error);
             });
@@ -130,7 +128,6 @@ const Form_post = ({ data }) => {
         });
         if (response.status === 200) {
             const data = await response.json();
-            console.log(data);
             postData();
             navigate('/card');
         } else {

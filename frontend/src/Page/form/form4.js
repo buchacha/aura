@@ -97,7 +97,6 @@ const Form_post = ({ data }) => {
       });
       if (response.status === 200) {
         const data = await response.json();
-        console.log(data);
         navigate('/form5')
       } else {
         navigate('/login')

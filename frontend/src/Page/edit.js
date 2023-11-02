@@ -236,7 +236,6 @@ const EditComponent = ({ data, date }) => {
                 },
             });
             // Handle the server response
-            console.log(response.data);
         } catch (error) {
             // Handle any errors
             console.error(error);

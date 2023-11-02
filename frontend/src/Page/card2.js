@@ -298,9 +298,7 @@ const Form_post = ({ data }) => {
             likes_user_list: like_list.current,
             match_user_list: match_user_list.current,
         })
-            .then(response => {
-                console.log('Data posted successfully:', response.data);
-            })
+            .then(response => {})
             .catch(error => {
                 console.error('Error while posting data:', error);
             });
@@ -314,7 +312,6 @@ const Form_post = ({ data }) => {
                 match_user_list: match_user_list.current,
             })
             .then(response => {
-                console.log('Data posted successfully:', response.data);
                 setIsMatch(true);
                 postDataMatch();
             })
@@ -332,7 +329,6 @@ const Form_post = ({ data }) => {
                 match_user_list: match_user_list.current,
             })
             .then(response => {
-                console.log('Data posted successfully:', response.data);
                 setIsMatch(false);
                 deleteDataMatch();
             })
@@ -347,7 +343,6 @@ const Form_post = ({ data }) => {
             match_user_list: match_user_list.current,
         })
             .then(response => {
-                console.log('Data posted successfully:', response.data);
                 if (isMatch) {
                     navigate('/card2', { state: { currentProfile: item, precent: item2 } })
                 }
@@ -362,7 +357,6 @@ const Form_post = ({ data }) => {
             match_user_list: match_user_list.current,
         })
             .then(response => {
-                console.log('Data posted successfully:', response.data);
                 updateRemoveMatchList();
                 updateRemoveLikeList();
                 postData();

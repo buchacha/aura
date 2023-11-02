@@ -93,7 +93,6 @@ const Form_post = ({ data }) => {
     });
     if (response.status === 200) {
       const data = await response.json();
-      console.log(data);
       navigate('/form3')
     } else {
       alert('Ошибка!!!');
@@ -158,7 +157,6 @@ function DataComponent() {
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_API_URL}/api/user/check/`)
       .then(response => {
-        console.log(response.data);
         setData({
           authenticated_user: response.data.authenticated_user,
           authenticated_user_email: response.data.authenticated_user_email,

@@ -81,7 +81,6 @@ const DataComponent = () => {
                 },
             });
             // Handle the server response
-            console.log(response.data);
         } catch (error) {
             // Handle any errors
             console.error(error);
