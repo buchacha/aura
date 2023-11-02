@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom'
 import { useLocation } from 'react-router-dom';
 import Home from './home.js';
 import Badge from 'react-bootstrap/Badge';
+import * as amplitude from "@amplitude/analytics-browser";
 
 function calculateAge(birthDate, otherDate) {
     if (birthDate && otherDate) {
@@ -97,24 +98,43 @@ const SympathyPage = ({ data, user, counterRef }) => {
     const [otherLikeCount, setOtherLikeCount] = useState(0);
 
     useEffect(() => {
+        let newMatchCount = 0;
+        let newMyLikeCount = 0;
+        let newOtherLikeCount = 0;
+
         const newMatch = data.authenticated_user.match_user_list.map((item) => {
             const profile = data.profiles.find((profile) => profile.user === item);
             if (profile) {
                 setMatchCount(prevMatchCount => prevMatchCount + 1);
+                newMatchCount += 1;
             }
         });
         const newMyLike = data.authenticated_user_like_list.map((item) => {
             const profile = data.profiles.find((profile) => profile.user === item);
             if (profile && !match.includes(profile)) {
                 setMyLikeCount(prevMyLikeCount => prevMyLikeCount + 1);
+                newMyLikeCount += 1;
             }
         });
         const newOtherLike = data.profiles.map((item) => {
             const likesUser = item.likes_user_list && item.likes_user_list.includes(data.authenticated_user_id);
             if (likesUser && !match.includes(item)) {
                 setOtherLikeCount(prevOtherLikeCount => prevOtherLikeCount + 1);
+                newOtherLikeCount += 1;
             }
         });
+
+        amplitude.track({
+            event_type: "Sympathy Opened",
+            event_properties: {
+                // match_count — Количество мэтчей
+                // like_count — Количество лайков
+                // i_am_liked_count — Количество кому я нравлюсь
+                match_count: newMatchCount,
+                like_count: newMyLikeCount,
+                i_am_liked_count: newOtherLikeCount,
+            },
+        })
     }, []);
 
     return (
@@ -142,7 +162,15 @@ const SympathyPage = ({ data, user, counterRef }) => {
                         if (profile) {
                             return (
                                 <div key={item} className='col-6'>
-                                    <Link to='/card2' state={{ currentProfile: profile, precent: match_result }}>
+                                    <Link to='/card2' state={{ currentProfile: profile, precent: match_result }} onClick={() => {
+                                        amplitude.track({
+                                            event_type: "Sympathy Card Pressed",
+                                            event_properties: {
+                                                //type_card — тип карточки (мэтч, лайк, нравлюсь)
+                                                type_card: 'match',
+                                            },
+                                        });
+                                    }}>
                                         <div>
                                             <div className='miniCardFrame'>
                                                 <img src={profile.photo} alt="avatar" ></img>
@@ -170,7 +198,15 @@ const SympathyPage = ({ data, user, counterRef }) => {
                         if (profile && !match.includes(profile)) {
                             return (
                                 <div key={item} className='col-6'>
-                                    <Link to='/card2' state={{ currentProfile: profile, precent: match_result }}>
+                                    <Link to='/card2' state={{ currentProfile: profile, precent: match_result }} onClick={() => {
+                                        amplitude.track({
+                                            event_type: "Sympathy Card Pressed",
+                                            event_properties: {
+                                                //type_card — тип карточки (мэтч, лайк, нравлюсь)
+                                                type_card: 'liked_by_user',
+                                            },
+                                        });
+                                    }}>
                                         <div>
                                             <div className='miniCardFrame'>
                                                 <img src={profile.photo} alt="avatar" ></img>
@@ -198,7 +234,15 @@ const SympathyPage = ({ data, user, counterRef }) => {
                             const match_result = calculateMatch(item)
                             return (
                                 <div key={item.id} className='col-6'>
-                                    <Link to='/card2' state={{ currentProfile: item, precent: match_result }}>
+                                    <Link to='/card2' state={{ currentProfile: item, precent: match_result }} onClick={() => {
+                                        amplitude.track({
+                                            event_type: "Sympathy Card Pressed",
+                                            event_properties: {
+                                                //type_card — тип карточки (мэтч, лайк, нравлюсь)
+                                                type_card: 'liked_by_other_users',
+                                            },
+                                        });
+                                    }}>
                                         <div>
                                             <div className='miniCardFrame'>
                                                 <img src={item.photo} alt="avatar" ></img>

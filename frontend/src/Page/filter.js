@@ -8,6 +8,7 @@ import Tooltip from 'rc-tooltip';
 import Slider from 'rc-slider';
 
 import { useNavigate } from 'react-router-dom'
+import * as amplitude from "@amplitude/analytics-browser";
 
 
 const Form_post = ({ data }) => {
@@ -129,6 +130,7 @@ const Form_post = ({ data }) => {
         if (response.status === 200) {
             const data = await response.json();
             postData();
+            amplitude.track('Filter Saved Pressed');
             navigate('/card');
         } else {
             alert('Ошибка!!!');
