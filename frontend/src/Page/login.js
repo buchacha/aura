@@ -9,7 +9,7 @@ import * as amplitude from "@amplitude/analytics-browser";
 
 const Component = () => {
   useEffect(() => {
-        amplitude.track('auth_login_opened');
+        amplitude.track('Auth Login Opened');
     }, []);
 
   const [errorMessage, setErrorMessage] = useState("");
@@ -72,7 +72,7 @@ const Component = () => {
       identifyEvent.set('status', 'authorized');
       amplitude.identify(identifyEvent);
 
-      amplitude.track('auth_login_succed');
+      amplitude.track('Auth Login Succed');
 
       if (userData.authenticated_user && userData.authenticated_user.is_profile_complete) {
         navigate('/card');

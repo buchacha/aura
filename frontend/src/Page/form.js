@@ -121,7 +121,7 @@ const Form_post = ({ data }) => {
 
         amplitude.setUserId(data.authenticated_user_email);
 
-        amplitude.track('onboard_about_opened');
+        amplitude.track('Onboard About Opened');
     }, []);
 
     const [selectedCountry, setSelectedCountry] = useState('');

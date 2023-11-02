@@ -8,7 +8,7 @@ import * as amplitude from "@amplitude/analytics-browser";
 
 const Component = () => {
     useEffect(() => {
-        amplitude.track('auth_signup_opened');
+        amplitude.track('Auth Signup Opened');
     }, []);
 
     const [errorMessage, setErrorMessage] = useState("");
@@ -67,7 +67,7 @@ const Component = () => {
                 identifyEvent.set('status', 'authorized');
                 amplitude.identify(identifyEvent);
 
-                amplitude.track('auth_signup_succed');
+                amplitude.track('Auth Signup Succed');
 
                 navigate('/form');
             }

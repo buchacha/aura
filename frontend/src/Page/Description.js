@@ -38,13 +38,13 @@ function GetDescription() {
             navigate('/card');
         }
 
-        amplitude.track('hello_opened');
+        amplitude.track('Hello Opened');
     }, [navigate]);
 
 
 
     const handleButtonClick = () => {
-        amplitude.track('hello_next_pressed');
+        amplitude.track('Hello Next Pressed');
         window.location.href = '/singup';
     };
 

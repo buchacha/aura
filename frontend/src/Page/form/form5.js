@@ -34,7 +34,7 @@ const Form_post = ({ data }) => {
 
         amplitude.setUserId(data.authenticated_user_email);
 
-        amplitude.track('onboard_audio_opened');
+        amplitude.track('Onboard Audio Opened');
     }, []);
 
     const [validated, setValidated] = useState(false);

@@ -62,7 +62,7 @@ const Form_post = ({ data }) => {
 
     amplitude.setUserId(data.authenticated_user_email);
 
-    amplitude.track('onboard_interest_opened')
+    amplitude.track('Onboard Interest Opened')
   }, []);
 
 

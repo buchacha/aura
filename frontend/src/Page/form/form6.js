@@ -147,7 +147,7 @@ const Form_post = ({ data }) => {
 
 function DataComponent() {
     useEffect(() => {
-        amplitude.track('onboard_character_opened');
+        amplitude.track('Onboard Character Opened');
     }, []);
 
     const [data, setData] = useState({ authenticated_user: null, });
