@@ -2,6 +2,7 @@ import React, { Component, useEffect, useState } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import axios from 'axios';
+import * as amplitude from "@amplitude/analytics-browser";
 
 import { Link } from 'react-router-dom'
 import { parseISO, format } from "date-fns";
@@ -123,7 +124,9 @@ const DataComponent = () => {
                     </Link>
                 </div>
                 <div className='d-flex align-items-center justify-content-center'>
-                    <Link reloadDocument to={'/premium'}>
+                    <Link reloadDocument to={'/premium'} onClick={() => {
+                        amplitude.track("My Premium Pressed");
+                    }}>
                         <Button className='noBorder' variant='custom'>
                             <div className='d-flex align-items-center justify-content-center premium-block-text '>
                                 <h3>получите бесплатный пробный <br /> доступ на 7 дней</h3>

@@ -4,6 +4,7 @@ import { Button } from "react-bootstrap";
 
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
+import * as amplitude from "@amplitude/analytics-browser";
 
 const DataComponent = () => {
 
@@ -36,13 +37,17 @@ const DataComponent = () => {
             <br />
             <br />
             <br />
-            <Link reloadDocument to={'/premium'}>
+            <Link reloadDocument to={'/premium'} onClick={() => {
+                amplitude.track("Pay Pay Pressed");
+            }}>
                 <Button className='d-flex buyButton justify-content-center' variant='custom'>
                     <h1>Купить</h1>
                 </Button>
             </Link>
             <br />
-            <Link reloadDocument to={'/premium'}>
+            <Link reloadDocument to={'/premium'} onClick={() => {
+                amplitude.track("Pay Trial Pressed");
+            }}>
                 <Button className='d-flex trialButton2 justify-content-center' variant='custom'>
                     <h2>Оформить пробный период</h2>
                 </Button>
