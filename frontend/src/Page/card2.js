@@ -12,6 +12,7 @@ import "../Component/common.css"
 
 import { Link, useNavigate } from 'react-router-dom'
 import { useLocation } from 'react-router-dom';
+import * as amplitude from "@amplitude/analytics-browser";
 
 
 function GetSign(birthDate) {
@@ -167,6 +168,7 @@ const Form_post = ({ data }) => {
         ) {
             navigate('/card');
         }
+        amplitude.track('Detail Opened')
     }, []);
 
     const item = location.state.currentProfile
@@ -183,6 +185,12 @@ const Form_post = ({ data }) => {
         setIsClickedAudio(true);
         setVisibleAudio((prev) => !prev);
         start();
+        amplitude.track({
+              event_type: "Detail Audio Listened",
+              event_properties: {
+                partner_id: item.user,
+              },
+            })
     }
 
     const handleButtonClickPause = () => {
@@ -246,6 +254,12 @@ const Form_post = ({ data }) => {
     const handleLike = () => {
         if (data.authenticated_user.likes_count >= 0) {
             data.authenticated_user.likes_count -= 1;
+            amplitude.track({
+              event_type: "Detail Like Pressed",
+              event_properties: {
+                partner_id: item.user,
+              },
+            })
             if (data.authenticated_user.likes_count >= 0) {
                 updateLikeList();
                 if (((like_list.current && like_list.current.includes(item.user)) &&
@@ -456,7 +470,14 @@ const Form_post = ({ data }) => {
                                     <h2 className="mainCardFrameBottomH2">{GetSign(item.age)}</h2>
                                 </div>
                                 <div className="d-flex justify-content-around transform  align-items-center">
-                                    <Link to="/card">
+                                    <Link to="/card" onClick={() => {
+                                        amplitude.track({
+                                          event_type: "Detail Discard Pressed",
+                                          event_properties: {
+                                            partner_id: item.user,
+                                          },
+                                        })
+                                    }}>
                                         <Button className="mainCardButton" variant='custom'>
                                             <img className="mainSVG" src={"no_button.svg"} alt="options" />
                                         </Button>
