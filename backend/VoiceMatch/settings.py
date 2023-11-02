@@ -1,13 +1,14 @@
 import os
 from pathlib import Path
 from datetime import timedelta
+from decouple import config
 
 
 # Базовая папка проекта
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Секретный ключ для шифрования
-SECRET_KEY = "django-insecure-273c2jjigs#oi^(1%!&(_+=-rez@l%@_ca=ohvsag^kqd=sc%x"
+SECRET_KEY = config("SECRET_KEY")
 
 # Режим отладки
 DEBUG = True  # LOCALDEV
