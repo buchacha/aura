@@ -13,6 +13,7 @@ import Home from './home.js';
 
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
+import * as amplitude from "@amplitude/analytics-browser";
 
 
 function GetSign(birthDate) {
@@ -115,6 +116,20 @@ function calculateAge(birthDate, otherDate) {
 }
 
 const ProfileList = ({ data }) => {
+  useEffect(() => {
+    const identifyEvent = new amplitude.Identify();
+    identifyEvent.set('status', 'authorized');
+    identifyEvent.set('sex', data.authenticated_user.sex);
+    identifyEvent.set('age', data.authenticated_user.age);
+    identifyEvent.set('country', data.authenticated_user.country);
+    identifyEvent.set('city', data.authenticated_user.city);
+    identifyEvent.set('balance', data.authenticated_user_likes_count);
+    amplitude.identify(identifyEvent);
+
+    amplitude.setUserId(data.authenticated_user_email);
+
+    amplitude.track('Cards Opened')
+  }, []);
 
   const [isClicked, setIsClicked] = useState(false);
   const [isMatch, setIsMatch] = useState(false);
@@ -124,6 +139,12 @@ const ProfileList = ({ data }) => {
     setIsClicked(true);
     setVisible((prev) => !prev);
     start();
+    amplitude.track({
+          event_type: "Cards Audio Listened",
+          event_properties: {
+            partner_id: data.profiles[currentIndex].user,
+          },
+        })
   }
 
   const handleButtonClickPause = () => {
@@ -260,6 +281,13 @@ const ProfileList = ({ data }) => {
   const counterRef = useRef(0);
 
   const handleNo = () => {
+    console.log(data);
+    amplitude.track({
+          event_type: "Cards Discard Pressed",
+          event_properties: {
+            partner_id: data.profiles[currentIndex].user,
+          },
+        })
     setCurrentIndex(prevIndex => prevIndex + 1);
     postData();
   };
@@ -268,6 +296,12 @@ const ProfileList = ({ data }) => {
 
   const handleLike = () => {
     if (data.authenticated_user_likes_count >= 0) {
+      amplitude.track({
+          event_type: "Cards Like Pressed",
+          event_properties: {
+            partner_id: data.profiles[currentIndex].user,
+          },
+        })
       setCurrentIndex(prevIndex => prevIndex + 1);
       data.authenticated_user_likes_count -= 1;
       if (data.authenticated_user_likes_count >= 0) {
@@ -408,7 +442,9 @@ const ProfileList = ({ data }) => {
               {currentProfile && (!data.authenticated_user_like_list.includes(currentProfile.user)
                 && !data.authenticated_user.match_user_list.includes(currentProfile.user)) && (
                   <div key={currentProfile.id}>
-                    <Link to='/card2' state={{ currentProfile: currentProfile, precent: calculateMatch(currentProfile) }}>
+                    <Link to='/card2' state={{ currentProfile: currentProfile, precent: calculateMatch(currentProfile)}} onClick={() => {
+                      amplitude.track('Cards Detail Pressed');
+                    }}>
                       <div className="mainCardFrame">
                         <img src={currentProfile.photo} alt="avatar" ></img>
                         <div className='likesCount'>
@@ -563,7 +599,17 @@ const ProfileList = ({ data }) => {
 };
 
 function DataComponent(props) {
-  const [data, setData] = useState({ profiles: [], authenticated_user_photo: null, authenticated_user_likes_count: null, authenticated_user_id: null, authenticated_parameter_array: [], authenticated_user_age: null, authenticated_user_age_filter: [], authenticated_user: null });
+  const [data, setData] = useState({
+    profiles: [],
+    authenticated_user_photo: null,
+    authenticated_user_likes_count: null,
+    authenticated_user_id: null,
+    authenticated_parameter_array: [],
+    authenticated_user_age: null,
+    authenticated_user_age_filter: [],
+    authenticated_user: null,
+    authenticated_user_email: null,
+  });
 
   if (!localStorage.hasOwnProperty('authTokens')) {
     window.open("/login", "_self");
@@ -597,6 +643,7 @@ function DataComponent(props) {
           authenticated_user_age: response.data.authenticated_user_age,
           authenticated_user_age_filter: response.data.authenticated_user_age_filter,
           authenticated_user: response.data.authenticated_user,
+          authenticated_user_email: response.data.authenticated_user_email,
         });
         setIsLoading(false);
       })
