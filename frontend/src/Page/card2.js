@@ -314,6 +314,12 @@ const Form_post = ({ data }) => {
             .then(response => {
                 setIsMatch(true);
                 postDataMatch();
+                amplitude.track({
+                  event_type: "Match Opened",
+                  event_properties: {
+                    partner_id: item.user,
+                  },
+                })
             })
             .catch(error => {
                 console.error('Error while posting data:', error);
@@ -541,7 +547,14 @@ const Form_post = ({ data }) => {
                                                 if (social.name == "social_media_vk" && item.social_media_vk != "")
                                                     return (
                                                         <a href={"https://vk.com/" + item.social_media_vk.slice(1)}>
-                                                            <div className='contactForm d-flex'>
+                                                            <div className='contactForm d-flex' onClick={() => {
+                                                                amplitude.track({
+                                                                  event_type: "Detail Contact Pressed",
+                                                                  event_properties: {
+                                                                    contact_social: "vk",
+                                                                  },
+                                                                })
+                                                            }}>
                                                                 <h1 className='contactTitle'>{social.value}</h1>
                                                                 <img src={social.icon} alt="sign" className="interestIcon" />
                                                             </div>
@@ -550,7 +563,14 @@ const Form_post = ({ data }) => {
                                                 else if (social.name == "social_media_tg" && item.social_media_tg != "")
                                                     return (
                                                         <a href={"https://t.me/" + item.social_media_tg.slice(1)}>
-                                                            <div className='contactForm d-flex'>
+                                                            <div className='contactForm d-flex' onClick={() => {
+                                                                amplitude.track({
+                                                                  event_type: "Detail Contact Pressed",
+                                                                  event_properties: {
+                                                                    contact_social: "tg",
+                                                                  },
+                                                                })
+                                                            }}>
                                                                 <h1 className='contactTitle'>{social.value}</h1>
                                                                 <img src={social.icon} alt="sign" className="interestIcon" />
                                                             </div>
@@ -559,7 +579,14 @@ const Form_post = ({ data }) => {
                                                 else if (social.name == "social_media_wa" && item.social_media_wa != "")
                                                     return (
                                                         <a href={"https://wa.me/" + item.social_media_wa.slice(1)}>
-                                                            <div className='contactForm d-flex'>
+                                                            <div className='contactForm d-flex' onClick={() => {
+                                                                amplitude.track({
+                                                                  event_type: "Detail Contact Pressed",
+                                                                  event_properties: {
+                                                                    contact_social: "wa",
+                                                                  },
+                                                                })
+                                                            }}>
                                                                 <h1 className='contactTitle'>{social.value}</h1>
                                                                 <img src={social.icon} alt="sign" className="interestIcon" />
                                                             </div>
@@ -568,7 +595,14 @@ const Form_post = ({ data }) => {
                                                 else if (social.name == "social_media_ok" && item.social_media_ok != "")
                                                     return (
                                                         <a href={"https://ok.ru/profile/" + item.social_media_ok.slice(1)}>
-                                                            <div className='contactForm d-flex'>
+                                                            <div className='contactForm d-flex' onClick={() => {
+                                                                amplitude.track({
+                                                                  event_type: "Detail Contact Pressed",
+                                                                  event_properties: {
+                                                                    contact_social: "ok",
+                                                                  },
+                                                                })
+                                                            }}>
                                                                 <h1 className='contactTitle'>{social.value}</h1>
                                                                 <img src={social.icon} alt="sign" className="interestIcon" />
                                                             </div>
@@ -577,7 +611,14 @@ const Form_post = ({ data }) => {
                                                 else if (social.name == "social_media_ig" && item.social_media_ig != "")
                                                     return (
                                                         <a href={"https://instagram.com/" + item.social_media_ig.slice(1)}>
-                                                            <div className='contactForm d-flex'>
+                                                            <div className='contactForm d-flex' onClick={() => {
+                                                                amplitude.track({
+                                                                  event_type: "Detail Contact Pressed",
+                                                                  event_properties: {
+                                                                    contact_social: "ig",
+                                                                  },
+                                                                })
+                                                            }}>
                                                                 <h1 className='contactTitle'>{social.value}</h1>
                                                                 <img src={social.icon} alt="sign" className="interestIcon" />
                                                             </div>
