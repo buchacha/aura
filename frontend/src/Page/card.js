@@ -564,7 +564,7 @@ const ProfileList = ({ data }) => {
                     <img className="mainSVG" src={"like_button.svg"} alt="options" id="like_button" />
                   </Button>
                 )}
-                {currentProfile && currentProfile.audio_5 && <audio ref={audioRef} src={currentProfile.audio_5} />}
+                {currentProfile && currentProfile.audio_5 && <audio ref={audioRef} src={currentProfile.audio_5.replace(/http:/g, "https:")} />}
               </div>
             )}
           </div>
@@ -631,11 +631,36 @@ function DataComponent(props) {
     return shuffledArray;
   };
 
+  const shuffleArray2 = (array) => {
+    if (array.length === 0) {
+      return [];
+    }
+
+    // Определяем первый город
+    const firstCity = array[0].city;
+
+    // Разделим массив на два подмассива: совпадающие и отличающиеся города
+    const matchingCity = [];
+    const differentCity = [];
+    array.forEach(item => {
+      if (item.city === firstCity) {
+        matchingCity.push(item);
+      } else {
+        differentCity.push(item);
+      }
+    });
+
+    // Перемешаем подмассив с отличающимися городами
+    const shuffledDifferentCity = shuffleArray(differentCity);
+
+    return  shuffleArray(matchingCity).concat(shuffledDifferentCity);
+  }
+
   useEffect(() => {
     axios.get('http://api.aura-ai.site/api/user/search/')
       .then(response => {
         setData({
-          profiles: shuffleArray(response.data.profiles),
+          profiles: shuffleArray2(response.data.profiles),
           authenticated_user_photo: response.data.authenticated_user_photo,
           authenticated_user_likes_count: response.data.authenticated_user_likes_count,
           authenticated_user_like_list: response.data.authenticated_user_like_list,
