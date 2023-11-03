@@ -7,7 +7,6 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth import login, logout
 from django.utils import timezone
 from django.db.models import Q
-from decouple import config
 
 from .validations import (
     custom_validation,
@@ -152,7 +151,7 @@ class UserSearchView(APIView):
         serializer_user = UserProfileSerializer(profile_instance, context={"request": request})
         response_data = {
             'profiles': serializer.data,
-            'authenticated_user_photo': config('BASE_URL') + profile_instance.photo.url,
+            'authenticated_user_photo': 'https://api.aura-ai.site' + profile_instance.photo.url,
             'authenticated_user_likes_count':  profile_instance.likes_count,
             'authenticated_user_like_list': profile_instance.likes_user_list,
             'authenticated_parameter_array': profile_instance.parameter_array,
@@ -174,7 +173,7 @@ class CreateUserProfileView(APIView):
         serializer = UserProfileSerializer(profile_instance)
         response_data = {
             'profiles': serializer.data,
-            'authenticated_user_photo': config('BASE_URL') + profile_instance.photo.url,
+            'authenticated_user_photo': 'https://api.aura-ai.site' + profile_instance.photo.url,
         }
         return Response(response_data)
 

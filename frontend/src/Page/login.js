@@ -26,7 +26,7 @@ const Component = () => {
 
     try {
       axios.defaults.headers.common['Authorization'] = `Bearer ${authTokens.access}`;
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/user/check/`);
+      const response = await axios.get(`http://api.aura-ai.site/api/user/check/`);
       setUserData({
         authenticated_user: response.data.authenticated_user,
       });
@@ -51,7 +51,7 @@ const Component = () => {
       return;
     }
 
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/token/`, {
+    const response = await fetch(`http://api.aura-ai.site/api/token/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

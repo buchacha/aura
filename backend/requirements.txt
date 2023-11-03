@@ -118,4 +118,3 @@ urllib3
 uvicorn
 Werkzeug
 wrapt
-python-decouple

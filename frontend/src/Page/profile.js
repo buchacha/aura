@@ -52,7 +52,7 @@ const DataComponent = () => {
     }
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_API_URL}/api/users/profile/`)
+        axios.get('http://api.aura-ai.site/api/users/profile/')
             .then(response => {
                 setData({ profiles: response.data.profiles, authenticated_user_photo: response.data.authenticated_user_photo });
             })

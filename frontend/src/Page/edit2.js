@@ -49,7 +49,7 @@ const DataComponent = () => {
     }
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_API_URL}/api/profile/`)
+        axios.get('http://api.aura-ai.site/profile/')
             .then(response => {
                 setData(response.data);
             })
@@ -75,7 +75,7 @@ const DataComponent = () => {
         formData.append('interests_array', JSON.stringify(selectedInterests));
 
         try {
-            const response = await axios.put(`${process.env.REACT_APP_API_URL}/api/profile/`, formData, {
+            const response = await axios.put('http://api.aura-ai.site/profile/', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },

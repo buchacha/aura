@@ -293,7 +293,7 @@ const Form_post = ({ data }) => {
     }
 
     const postData = () => {
-        axios.post(`${process.env.REACT_APP_API_URL}/api/users/profile/`, {
+        axios.post('http://api.aura-ai.site/api/users/profile/', {
             likes_count: data.authenticated_user.likes_count,
             likes_user_list: like_list.current,
             match_user_list: match_user_list.current,
@@ -306,7 +306,7 @@ const Form_post = ({ data }) => {
 
     const postDataWithMatch = () => {
         axios
-            .post(`${process.env.REACT_APP_API_URL}/api/users/profile/`, {
+            .post('http://api.aura-ai.site/api/users/profile/', {
                 likes_count: data.authenticated_user.likes_count,
                 likes_user_list: like_list.current,
                 match_user_list: match_user_list.current,
@@ -329,7 +329,7 @@ const Form_post = ({ data }) => {
 
     const deleteDataWithMatch = () => {
         axios
-            .post(`${process.env.REACT_APP_API_URL}/api/users/profile/`, {
+            .post('http://api.aura-ai.site/api/users/profile/', {
                 likes_count: data.authenticated_user.likes_count,
                 likes_user_list: like_list.current,
                 match_user_list: match_user_list.current,
@@ -345,7 +345,7 @@ const Form_post = ({ data }) => {
     };
 
     const postDataMatch = () => {
-        axios.post(`${process.env.REACT_APP_API_URL}/api/users/add_match/`, {
+        axios.post(`http://api.aura-ai.site/api/users/add_match/`, {
             match_user_list: match_user_list.current,
         })
             .then(response => {
@@ -359,7 +359,7 @@ const Form_post = ({ data }) => {
     };
 
     const deleteDataMatch = () => {
-        axios.post(`${process.env.REACT_APP_API_URL}/api/users/remove_match/`, {
+        axios.post('http://api.aura-ai.site/api/users/remove_match/', {
             match_user_list: match_user_list.current,
         })
             .then(response => {
@@ -677,7 +677,7 @@ function DataComponent(props) {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_API_URL}/api/user/search/`)
+        axios.get('http://api.aura-ai.site/api/user/search/')
             .then(response => {
                 setData({
                     profiles: response.data.profiles,

@@ -87,7 +87,7 @@ const Form_post = ({ data }) => {
         if (!data.authenticated_user.city_filter) {
             formData.city_filter = ""
         }
-        axios.post(`${process.env.REACT_APP_API_URL}/api/users/profile/`, {
+        axios.post('http://api.aura-ai.site/api/users/profile/', {
             country_filter: formData.country_filter,
             city_filter: formData.city_filter,
             age_filter: formData.age_filter,
@@ -114,7 +114,7 @@ const Form_post = ({ data }) => {
 
         const authTokens = localStorage.getItem('authTokens');
 
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/users/profile/`, {
+        const response = await fetch('http://api.aura-ai.site/api/users/profile/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -298,7 +298,7 @@ function DataComponent() {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_API_URL}/api/user/check/`)
+        axios.get('http://api.aura-ai.site/api/user/check/')
             .then(response => {
                 setData({
                     authenticated_user: response.data.authenticated_user

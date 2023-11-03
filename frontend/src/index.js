@@ -111,7 +111,7 @@ const router = createBrowserRouter([
   },
 ]);
 
-amplitude.init(process.env.REACT_APP_AMPLITUDE_API_KEY, {
+amplitude.init('7bdebd16265767f59beb2a959ea61ba0', {
     logLevel: amplitude.Types.LogLevel.None,
     defaultTracking: {
       attribution: false,

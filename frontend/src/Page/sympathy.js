@@ -278,7 +278,7 @@ function DataComponent(props) {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_API_URL}/api/user/search/`)
+        axios.get('http://api.aura-ai.site/api/user/search/')
             .then(response => {
                 setData({
                     profiles: response.data.profiles,
