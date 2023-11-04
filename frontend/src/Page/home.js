@@ -5,7 +5,7 @@ const Component = () => {
     return (
         <div className="vertical-center mainPage">
             <div className="container d-flex justify-content-center">
-                <a className="mainLogo" id="logo" href="/description">VoiceMatch</a>
+                <a className="mainLogo" id="logo" href="/description">AURA</a>
             </div>
         </div>
     );
