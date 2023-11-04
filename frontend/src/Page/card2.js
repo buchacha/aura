@@ -628,7 +628,7 @@ const Form_post = ({ data }) => {
                                             }
                                         </div>
                                     )}
-                                    <audio ref={audioRef} src={item.audio_5} />
+                                    <audio ref={audioRef} src={item.audio_5.replace(/http:/g, "https:")} />
                                 </div>
                             </div>
                         </div>
