@@ -20,6 +20,9 @@ const DataComponent = () => {
         backgroundImage: 'url(' + urlImg + ')',
     }
 
+    const paymentLink = "https://forms.gle/9JN2KARqjKtiiRmr7";
+    const trialLink = "https://forms.gle/twkfMZAkv5YtQv297";
+
     return (
         <div className='p-3 premiumPage align-items-center justify-content-center' style={imgSyle}>
             <Button className='exit' onClick={() => navigate(-1)} variant='custom'>
@@ -37,21 +40,21 @@ const DataComponent = () => {
             <br />
             <br />
             <br />
-            <Link reloadDocument to={'/premium'} onClick={() => {
+            <a href={paymentLink} target="_blank" rel="noopener noreferrer" onClick={() => {
                 amplitude.track("Pay Pay Pressed");
             }}>
                 <Button className='d-flex buyButton justify-content-center' variant='custom'>
                     <h1>Купить</h1>
                 </Button>
-            </Link>
+            </a>
             <br />
-            <Link reloadDocument to={'/premium'} onClick={() => {
+            <a href={trialLink} target="_blank" rel="noopener noreferrer" onClick={() => {
                 amplitude.track("Pay Trial Pressed");
             }}>
                 <Button className='d-flex trialButton2 justify-content-center' variant='custom'>
                     <h2>Оформить пробный период</h2>
                 </Button>
-            </Link>
+            </a>
         </div>
     );
 };

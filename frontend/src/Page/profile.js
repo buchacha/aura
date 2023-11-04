@@ -198,8 +198,8 @@ const DataComponent = () => {
                             <Row className="justify-content-center">
                                 <Col md={6}>
                                     <h2 className="otherTitle text-center">Поддержка</h2>
-                                    <p className="mainText text-center">support@example.com</p>
-                                    <p className="mainText text-center">@support_telegram</p>
+                                    <p className="mainText text-center"><a href={'mailto:support@aura-ai.site'}>support@aura-ai.site</a></p>
+                                    <p className="mainText text-center"><a href={'https://vk.com/auradating'} target="_blank" rel="noopener noreferrer">https://vk.com/auradating</a></p>
                                 </Col>
                             </Row>
                         </Container>
