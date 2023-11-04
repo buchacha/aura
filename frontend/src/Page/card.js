@@ -281,7 +281,7 @@ const ProfileList = ({ data }) => {
   const counterRef = useRef(0);
 
   const handleNo = () => {
-    if (data.profiles.length < currentIndex) {
+    if (data.profiles.length > currentIndex) {
       amplitude.track({
           event_type: "Cards Discard Pressed",
           event_properties: {
