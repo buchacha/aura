@@ -114,6 +114,21 @@ const Component = () => {
                     <div className="NextButtonTextCustom">Далее</div>
                 </Button>
             </Form>
+
+            <div className="footerText mt-4" style={{
+                position: 'absolute',
+                bottom: '0',
+                right: '0',
+                left: '0',
+                margin: '3%',
+                textAlign: 'center',
+            }}>
+                Продолжая использование, Вы соглашаетесь с{' '}
+                <a href="https://vk.com/topic-223127554_49333014" target="_blank" rel="noopener noreferrer">политикой конфиденциальности</a>
+                {' '}и{' '}
+                <a href="https://vk.com/topic-223127554_49333017" target="_blank" rel="noopener noreferrer">условиями использования сервиса</a>
+                .
+            </div>
         </div>
     );
 }
