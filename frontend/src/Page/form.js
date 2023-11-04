@@ -178,7 +178,7 @@ const Form_post = ({ data }) => {
         handleChange(event);
     };
 
-    const [radioValue, setRadioValue] = useState('1');
+    const [radioValue, setRadioValue] = useState('Муж.');
 
     function GetToggleButton() {
         const radios = [

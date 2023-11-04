@@ -111,7 +111,7 @@ const router = createBrowserRouter([
   },
 ]);
 
-amplitude.init('7bdebd16265767f59beb2a959ea61ba0', {
+amplitude.init('e15b7708f5cd440f0401a9cf21a3464f', {
     logLevel: amplitude.Types.LogLevel.None,
     defaultTracking: {
       attribution: false,
