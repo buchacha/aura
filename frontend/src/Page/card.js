@@ -564,7 +564,7 @@ const ProfileList = ({ data }) => {
                     <img className="mainSVG" src={"like_button.svg"} alt="options" id="like_button" />
                   </Button>
                 )}
-                {currentProfile && currentProfile.audio_5 && <audio ref={audioRef} src={currentProfile.audio_5.replace(/http:/g, "https:")} />}
+                {currentProfile && currentProfile.audio_5 && <audio ref={audioRef} src={currentProfile.audio_5} />}
               </div>
             )}
           </div>
