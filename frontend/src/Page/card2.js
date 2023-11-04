@@ -137,6 +137,16 @@ const Form_post = ({ data }) => {
         { name: 'Книги', value: 'Книги', photo: 'book_icon2.svg' },
         { name: 'Питомцы', value: 'Питомцы', photo: 'cat_icon2.svg' },
         { name: 'Готовка', value: 'Готовка', photo: 'pizza_icon2.svg' },
+        { name: 'Кино', value: 'Кино', photo: 'movie_icon2.svg' },
+        { name: 'Юмор', value: 'Юмор', photo: 'humor_icon2.svg' },
+        { name: 'Походы', value: 'Походы', photo: 'hikes_icon2.svg' },
+        { name: 'Фотография', value: 'Фотография', photo: 'photography_icon2.svg' },
+        { name: 'Искусство', value: 'Искусство', photo: 'art_icon2.svg' },
+        { name: 'Бары', value: 'Бары', photo: 'bars_icon2.svg' },
+        { name: 'Ужасы', value: 'Ужасы', photo: 'horror_icon2.svg' },
+        { name: 'Музыка', value: 'Музыка', photo: 'musics_icon2.svg' },
+        { name: 'Машины', value: 'Машины', photo: 'cars_icon2.svg' },
+        { name: 'Мотоциклы', value: 'Мотоциклы', photo: 'motorcycles_icon2.svg' },
     ];
 
     const socials = [
@@ -514,12 +524,13 @@ const Form_post = ({ data }) => {
                                     <h4 className="CustomTitle">Интересы</h4>
                                     <div>
                                         {interests.map((interest, index) => {
-                                            if (item.interests_array.includes(interest.value))
+                                            if (item.interests_array.includes(interest.value)) {
                                                 return (
                                                     <div key={index} className='p-1 interestButton border-0 bg-transparent'>
                                                         <img src={interest.photo} alt="sign" className="interestIcon" />
                                                     </div>
                                                 );
+                                            }
                                         })}
                                     </div>
                                     {((!shouldRender && !shouldRender2) || (shouldRender && !shouldRender2)) && !isClicked && (

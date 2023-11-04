@@ -200,9 +200,7 @@ const Form_post = ({ data }) => {
                             value={radio.value}
                             checked={radioValue === radio.value}
                             onChange={(e) => {
-                                console.log(e.currentTarget)
                                 setRadioValue(e.currentTarget.value)
-                                console.log(radioValue)
                             }}
                         >
                             <img src={radio.photo[radioValue === radio.value ? 1 : 0]} alt="sign" className='sexButtonImg' />
@@ -240,7 +238,6 @@ const Form_post = ({ data }) => {
             setIsPopupOpen(true)
         } else {
             setIsPopupOpen(false)
-            console.log(radioValue)
             const response = await fetch(`${process.env.REACT_APP_API_URL}/api/users/profile/`, {
                 method: 'POST',
                 headers: {
@@ -258,7 +255,7 @@ const Form_post = ({ data }) => {
             if (response.status === 200) {
                 const data = await response.json();
 
-                // navigate('/form2')
+                navigate('/form2')
             } else {
                 alert('Ошибка!!!')
             }
