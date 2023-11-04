@@ -305,6 +305,11 @@ const ProfileList = ({ data }) => {
         })
       setCurrentIndex(prevIndex => prevIndex + 1);
       data.authenticated_user_likes_count -= 1;
+
+      const identifyEvent = new amplitude.Identify();
+      identifyEvent.set('balance', data.authenticated_user_likes_count);
+      amplitude.identify(identifyEvent);
+
       if (data.authenticated_user_likes_count >= 0) {
         updateLikeList();
         if (((like_list.current && like_list.current.includes(data.profiles[currentIndex].user)) &&
